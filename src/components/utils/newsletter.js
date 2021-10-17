@@ -1,7 +1,9 @@
-import React, { useRef, useState, useEffect} from 'react'; 
+import React, { useRef, useEffect} from 'react'; 
 import { useSelector, useDispatch } from 'react-redux';
 import { Form, Button } from 'react-bootstrap';
-import { addNewsLetter } from '../../store/actions'
+import { addNewsLetter, clearNewsletter } from '../../store/actions'
+
+import { showToast } from '../utils/tools';
 
 const NewsLetter = () => {
 
@@ -15,6 +17,29 @@ const NewsLetter = () => {
         dispatch(addNewsLetter({email:value}))
         
     }
+
+    useEffect(()=>{
+        if(userData.newsletter){
+            console.log(userData.newsletter)
+            if(userData.newsletter === "added"){
+                showToast('SUCCESS','Thank you for subscribing !!!')
+                textInput.current.value = "";
+                //dispatch(clearNewsletter())
+            }else{
+                showToast('ERROR', 'Email already in use');
+                textInput.current.value = "";
+                //dispatch(clearNewsletter())
+            }
+        }
+    },[userData])
+
+    // clearing newsletter when leaving the component 
+    useEffect(()=>{
+        return () => {
+            dispatch(clearNewsletter())
+        }
+    },[dispatch])
+
 
     return(
         <>

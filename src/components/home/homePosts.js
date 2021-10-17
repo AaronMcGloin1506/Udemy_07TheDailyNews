@@ -9,9 +9,6 @@ import { getPosts } from '../../store/actions'
 
 
 
-
-
-
 const HomePosts = () => {
 
     const homePosts = useSelector(state => state.posts);
