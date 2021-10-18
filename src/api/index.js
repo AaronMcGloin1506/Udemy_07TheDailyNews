@@ -33,7 +33,7 @@ export const addNewsLetter = async(data) => {
 
             return{
                 newsletter:'added',
-                email: response.data
+                email: response.data 
             }
         } else{
             // already on db
@@ -44,5 +44,15 @@ export const addNewsLetter = async(data) => {
     }
     catch(error){
         throw error;
+    }
+}
+
+export const getPostById = async(id) => {
+    try{
+        const response = await axios.get(`${URL_SERV}/posts/${id}`);
+        return response.data
+    }
+    catch(error){
+        return '404';
     }
 }

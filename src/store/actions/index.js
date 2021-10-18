@@ -3,7 +3,8 @@ import * as api from '../../api/index';
 import {
     GET_POSTS,
     ADD_NEWSLETTER,
-    CLEAR_NEWSLETTER
+    CLEAR_NEWSLETTER,
+    GET_POST_BY_ID
     } from '../types'
 
 
@@ -12,6 +13,11 @@ import {
 export const getPosts = (homePosts,page,order,limit) => ({
     type: GET_POSTS,
     payload: api.getPosts(homePosts,page,order,limit)
+})
+
+export const getPostById = (id) => ({
+    type: GET_POST_BY_ID,
+    payload: api.getPostById(id)
 })
 
     /////Users/////
