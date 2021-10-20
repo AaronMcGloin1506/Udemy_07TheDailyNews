@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Form, Button } from 'react-bootstrap';
 import { addNewsLetter, clearNewsletter } from '../../store/actions'
 
-import { showToast } from '../utils/tools';
+import { showToast } from './tools';
 
 const NewsLetter = () => {
 
