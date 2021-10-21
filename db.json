@@ -235,5 +235,13 @@
       "id": 8
     }
   ],
-  "contact": []
+  "contact": [
+    {
+      "email": "aaron@gmail.com",
+      "firstname": "Aaron",
+      "lastname": "McGloin",
+      "message": "This is a message",
+      "id": 1
+    }
+  ]
 }

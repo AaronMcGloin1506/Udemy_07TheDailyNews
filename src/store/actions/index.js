@@ -5,7 +5,8 @@ import {
     ADD_NEWSLETTER,
     CLEAR_NEWSLETTER,
     GET_POST_BY_ID,
-    CLEAR_POST_BY_ID
+    CLEAR_POST_BY_ID,
+    SEND_MESSAGE
     } from '../types'
 
 
@@ -35,8 +36,10 @@ export const addNewsLetter = (data) => ({
 
 export const clearNewsletter = () => ({
     type: CLEAR_NEWSLETTER,
-    payload: {
-        newsletter: false,
-        email: []
-    }
+    payload: {}
+})
+
+export const sendMessage = (data) => ({
+    type: SEND_MESSAGE,
+    payload: api.sendMessage(data)
 })

@@ -1,10 +1,14 @@
 import React from 'react'; 
 import { useFormik } from 'formik';
 import * as Yup from 'yup'
-import { Alert } from 'react-bootstrap'
+import { Alert } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { sendMessage } from '../../store/actions';
+import { showToast } from '../utils/tools'
 
 const Contact = () => {
 
+    const dispatch = useDispatch();
     const formik = useFormik({
         initialValues: { email:'', firstname:'', lastname:'', message:''},
         validationSchema: Yup.object({
@@ -14,7 +18,14 @@ const Contact = () => {
             message:Yup.string().required('Sorry the message is required').max(500,'Sorry max characters is 500')
         }),
         onSubmit:(values,{resetForm})=>{
-            console.log(values)
+            dispatch(sendMessage(values)).then(({payload})=>{
+                if(payload){
+                    resetForm();
+                    showToast('SUCCESS','Thank you we will contact you back')
+                } else {
+                    showToast('ERROR','Sorry something happened please try again')
+                }
+            });
         }
     })
 
@@ -73,7 +84,8 @@ const Contact = () => {
                     <textarea 
                         className="form-control"
                         name="message"
-                        rows="3"></textarea>
+                        rows="3"
+                        {...formik.getFieldProps('message')}></textarea>
                     { formik.errors.message && formik.touched.message ?
                         <Alert variant="danger">
                             {formik.errors.message}
